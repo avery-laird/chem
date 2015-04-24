@@ -1,0 +1,185 @@
+#recent-posts p.recent-posts-meta {
+  opacity: 0.85;
+}
+
+#recent-posts .post-thumb:hover span {
+  opacity: 1;
+}
+
+#recent-posts .post-thumb span {
+position: absolute;
+top: 50%;
+left: 50%;
+margin: -8px 0 0 -8px;
+font-size: 16px;
+color: #FFFFFF;
+opacity: 0;
+filter: alpha(opacity=0);
+-webkit-transition: opacity 0.15s ease-in-out 0s;
+-moz-transition: opacity 0.15s ease-in-out 0s;
+-o-transition: opacity 0.15s ease-in-out 0s;
+transition: opacity 0.15s ease-in-out 0s;
+}
+
+#recent-posts .post-thumb {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#recent-posts .post-thumb:hover .overlay {
+ opacity: 0.5;
+}
+
+#recent-posts .post-thumb .overlay {
+ position: absolute;
+ display: block;
+ height: 100%;
+ width: 100%;
+ left: 0;
+ top: 0;
+ background: #0085a1;
+ opacity: 0;
+ filter: alpha(opacity=0);
+ -webkit-transition: opacity 0.35s ease-in-out 0s;
+ -moz-transition: opacity 0.35s ease-in-out 0s;
+ -o-transition: opacity 0.35s ease-in-out 0s;
+ transition: opacity 0.35s ease-in-out 0s;
+}
+
+article.post.col-md-4 h2 {
+  font-weight: 400;
+  font-size: larger; 
+}
+article.post.col-md-4 a {
+  text-decoration: none;
+}
+article.post.col-md-4 p {
+  font-size: medium;
+}
+
+div#search-results h3  a {
+  text-decoration: none;
+}
+div#search-results p+ a {
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* all */
+::-webkit-input-placeholder {  }
+::-moz-placeholder { } /* firefox 19+ */
+:-ms-input-placeholder {  } /* ie */
+input:-moz-placeholder { }
+
+/* individual: webkit */
+input.form-control.search-bar::-webkit-input-placeholder { visibility: hidden;  }
+input.form-control.search-bar::-webkit-input-placeholder { visibility: hidden;  }
+input.form-control.search-bar::-webkit-input-placeholder { visibility: hidden;  }
+
+/* individual: mozilla */
+input.form-control.search-bar::-moz-placeholder {  }
+input.form-control.search-bar::-moz-placeholder {  }
+input.form-control.search-bar::-moz-placeholder {  }
+
+
+select.search-select {
+  visibility: hidden;
+}
+
+button.search-btn {
+
+  margin-right: 15px;
+  background: transparent;
+  color: white;
+  border-radius: 0px 20px 20px 0px;
+  margin-top: 5px;
+}
+
+input.form-control.search-bar {
+  background: transparent; 
+  color: white;
+  margin-top: 5px;
+  width: 70px;
+  -webkit-transition: width 0.5s;
+  transition: width 0.5s;  
+}
+.is-fixed input.form-control.search-bar {
+  color: #404040;
+}
+.is-fixed button.search-btn {
+  color: #404040;
+}
+
+input.form-control.search-bar:hover {
+  width: 200px;
+}
+input.form-control.search-bar:focus {
+  width: 200px;
+}
+
+
+
+.blog-list-detail p {
+    opacity: 0.5;
+}
+.blog-list-detail p > a {
+    text-decoration: none;
+}
+
+.cl-effect-2 a {
+	line-height: 44px;
+	-webkit-perspective: 1000px;
+	-moz-perspective: 1000px;
+	perspective: 1000px;
+}
+
+.cl-effect-2 a span {
+	position: relative;
+	display: inline-block;
+	padding: 0 14px;
+	background: #2195de;
+	-webkit-transition: -webkit-transform 0.3s;
+	-moz-transition: -moz-transform 0.3s;
+	transition: transform 0.3s;
+	-webkit-transform-origin: 50% 0;
+	-moz-transform-origin: 50% 0;
+	transform-origin: 50% 0;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.csstransforms3d .cl-effect-2 a span::before {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #0965a0;
+	content: attr(data-hover);
+	-webkit-transition: background 0.3s;
+	-moz-transition: background 0.3s;
+	transition: background 0.3s;
+	-webkit-transform: rotateX(-90deg);
+	-moz-transform: rotateX(-90deg);
+	transform: rotateX(-90deg);
+	-webkit-transform-origin: 50% 0;
+	-moz-transform-origin: 50% 0;
+	transform-origin: 50% 0;
+}
+
+.cl-effect-2 a:hover span,
+.cl-effect-2 a:focus span {
+	-webkit-transform: rotateX(90deg) translateY(-22px);
+	-moz-transform: rotateX(90deg) translateY(-22px);
+	transform: rotateX(90deg) translateY(-22px);
+}
+
+.csstransforms3d .cl-effect-2 a:hover span::before,
+.csstransforms3d .cl-effect-2 a:focus span::before {
+	background: #28a2ee;	
+}

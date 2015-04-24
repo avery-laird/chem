@@ -1,0 +1,58 @@
+{% extends 'pages/page.html'%}
+{% load blog_tags mezzanine_tags typogrify_tags staticfiles %}
+
+{% block splash_image %}
+  {% if page.homepage.splash %}
+    {{ MEDIA_URL }}{{ page.homepage.splash }}
+  {% else %}
+    {% static 'img/home-bg.jpg' %}
+  {% endif %}
+{% endblock %}
+
+{% block heading %}
+  <div class="site-heading">
+    <span class="subheading">{{ page.homepage.header }}</span>
+    <hr class="small">
+    <h1>{{ page.homepage.subheader }}</h1>
+  </div>
+{% endblock %}
+
+{% block main %}
+<section id="recent-posts">
+<div class="container">
+  <div class="row text-center">  
+  {% blog_recent_posts 3 as recent_posts %}
+  {% if recent_posts %}
+    <h3>Recent Posts</h3>
+  </div>
+  <div class="row">
+      {% for recent_post in recent_posts %}
+      <article class="post col-md-4">
+      {% spaceless %}
+        <div class="post-thumb">
+        {% if settings.BLOG_USE_FEATURED_IMAGE and recent_post.featured_image %}
+        <a href="{{ recent_post.get_absolute_url }}">
+        <img class="img img-responsive" src="{{ MEDIA_URL }}{{ recent_post.featured_image }}">
+        <div class="overlay"></div>
+        <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+        </a>
+        {% endif %}
+        </div>
+        <h2>
+        <a href="{{ recent_psot.get_absolute_url }}">{{ recent_post.title }}</a>
+        </h2>
+        <p>{{ recent_post.description|safe|typogrify }}</p>
+	<p class="recent-posts-meta">Posted by <a href="{% url "blog_post_list_author" user %}">{{ recent_post.user }}</a> {{ recent_post.publish_date|timesince }} ago</p>
+
+      {% endspaceless %}
+      </li>
+      </article>
+      {% endfor %}
+      
+  </div>
+  {% endif %}    
+  </div>
+</section>    
+<hr>
+
+{% endblock %}

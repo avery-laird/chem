@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n future staticfiles %}
+
+{% ifinstalled cartridge.shop %}
+{% load shop_tags %}
+{% endifinstalled %}
+
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+
+{% ifinstalled mezzanine.blog %}
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+{% endifinstalled %}
+
+{% compress css %}
+
+<link href="{% static "css/camera.css" %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<!--<link rel="stylesheet" href="{% static "css/mezzanine.css" %}">-->
+<!--<link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">-->
+
+<!-- Custom CSS -->
+<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+<link href="{% static "css/clean-blog.css" %}" rel="stylesheet">
+<link href="{% static "css/manni.css" %}" rel="stylesheet">
+<link href="{% static "css/custom.css" %}" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+{% if LANGUAGE_BIDI %}
+<link rel="stylesheet" href="{% static "css/rtl.css" %}">
+{% endif %}
+{% ifinstalled cartridge.shop %}
+<link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+{% if LANGUAGE_BIDI %}
+<link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
+{% endif %}
+{% endifinstalled %}
+{% block extra_css %}{% endblock %}
+{% endcompress %}
+
+{% compress js %}
+<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+<!--<script src="{% static "js/jquery.mobile.customized.min.js" %}"></script>-->
+<script src="{% static "js/jquery.easing.1.3.js" %}"></script>
+<script src="{% static "js/camera.min.js" %}"></script>
+<script src="{% static "js/bootstrap.js" %}"></script>
+<script src="{% static "js/bootstrap-extras.js" %}"></script>
+<script src="{% static "js/dropcap.min.js" %}"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/javascript">
+        $(document).ready(function(){   
+            //Slider
+            $('#camera_wrap_1').camera({
+		autoAdvance: true,
+		playPause: false,
+		time: 2000,
+		hover: false,
+		piePosition: 'leftBottom',
+		loader: 'none'
+	    });
+
+            //Featured works & latest posts
+            //$('#mycarousel, #mycarousel2, #newscarousel').jcarousel();                                                  
+    });     
+</script>
+{% block extra_js %}{% endblock %}
+{% endcompress %}
+
+<!--[if lt IE 9]>
+<script src="{% static "js/html5shiv.js" %}"></script>
+<script src="{% static "js/respond.min.js" %}"></script>
+<![endif]-->
+{% block extra_head %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}body{% endblock %}">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'mezzanine.pages.views.page' '/' %}">{{ settings.SITE_TITLE }}</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {% page_menu "pages/menus/dropdown.html" %}
+                </ul>
+		
+		{% search_form %}
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+{% if page.homepage.slides.all %}
+  <div id="main_slider">
+    <div class="camera_wrap" id="camera_wrap_1">
+      {% for slide in page.homepage.slides.all %}
+        <div data-src="{{ MEDIA_URL }}{% thumbnail slide.image 0 600 %}" data-alignment="center">
+          <div style="position:absolute; top: 30%; left: 35%; color:#fff; padding:5px; " class="fadeIn camera_effected  post-heading"><h1 style="font-size:600%; background: rgba(0, 0, 0, 0.5)">{{ page.homepage.header }}</h1>
+            <hr class="small">
+          </div>
+	</div>
+      {% endfor %}
+    </div><!-- #camera_wrap_1 -->
+  <div class="clear"></div> 
+</div>
+{% else %}
+  <header class="intro-header" style="background-attachment: fixed;background-image: url('{% spaceless %}{% block splash_image %}{% endblock %}{% endspaceless %}')">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          {% block heading %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </header>
+{% endif %}
+
+{% comment %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+{% endcomment %}
+      {% block main %}{% endblock %}
+{% comment %}
+    </div>
+  </div>
+</div>
+{% endcomment %}
+
+ <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Avery Laird 2014</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+{% include "includes/footer_scripts.html" %}
+
+</body>
+
+<!-- Bootstrap Core JavaScript -->
+<!--<script src="{% static "js/bootstrap.min.js" %}"></script>-->
+<!-- Custom Theme JavaScript -->
+<script src="{% static "js/clean-blog.js" %}"></script>
+{% block extra_footer_js %}{% endblock %}
+</html>
