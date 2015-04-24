@@ -1,5 +1,8 @@
 from __future__ import absolute_import, unicode_literals
 
+SECRET_KEY = "344eb430-eaa7-4b54-a964-5cdccc485573814e72c2-482a-4b99-8aa0-1da83b9045e17548acd7-1774-432d-afd3-fe2579a17674"
+NEVERCACHE_KEY = "d02be14e-8e53-47fe-b424-53025a17afd21958508f-5b33-47bf-b9c6-6c4f2df74640c140220e-8de1-4adb-8605-b24e33072716"
+
 ######################
 # MEZZANINE SETTINGS #
 ######################
@@ -94,7 +97,7 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'chem.averylaird.com', 'www.chem.averylaird.com', 'averylaird.com.', 'averylaird.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
